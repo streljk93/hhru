@@ -20,10 +20,10 @@ class JButtonCity extends React.Component {
     }
 
     render() {
-        const { variant, color, size } = this.props;
+        const { variant, color, size, style } = this.props;
 
         return (
-            <div>
+            <div style={style}>
                 <Button
                     variant={variant}
                     color={color}

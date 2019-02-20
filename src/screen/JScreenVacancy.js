@@ -1,6 +1,6 @@
 // libraries
 import React from 'react';
-import { Button } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 // own components
 import JVacancyList from '../components/JVacancyList';
@@ -19,26 +19,27 @@ class JScreenVacancy extends React.Component {
         return (
             <div>
                 <JMenu>
-                    <JMenu.Item>
-                        {/*<Button variant="outlined" color="primary" size="medium">Город</Button>*/}
-                        <JButtonCity
-                            variant="outlined"
-                            color="primary"
-                            size="medium"
-                            onChange={this.props.onRemoteFetchVacancyList}
-                        />
-                    </JMenu.Item>
-                    <JMenu.Item>
-                        <JButtonExperience
-                            onChange={this.props.onRemoteFetchVacancyList}
-                            variant="outlined"
-                            color="primary"
-                            size="medium"
-                        />
-                    </JMenu.Item>
-                    <JMenu.Item right full>
-                        <JInputSearch onSearch={this.props.onRemoteFetchVacancyList} />
-                    </JMenu.Item>
+                    <Grid container>
+                        <Grid item xs={12} md={6} style={{ display: 'flex', marginBottom: 10, alignItems: 'center' }}>
+                            <JButtonCity
+                                variant="outlined"
+                                color="primary"
+                                size="medium"
+                                onChange={this.props.onRemoteFetchVacancyList}
+                                style={{ marginRight: 10 }}
+                            />
+                            <JButtonExperience
+                                onChange={this.props.onRemoteFetchVacancyList}
+                                variant="outlined"
+                                color="primary"
+                                size="medium"
+                            />
+                        </Grid>
+                        <Grid item xs={12} md={6} style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 10 }}>
+                            <JInputSearch onSearch={this.props.onRemoteFetchVacancyList} />
+                        </Grid>
+                    </Grid>
+
                 </JMenu>
                 <JVacancyList items={this.props.vacancyList}/>
             </div>

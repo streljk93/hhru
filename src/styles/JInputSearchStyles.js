@@ -3,7 +3,7 @@ export default theme => ({
     root: {
         display: 'flex',
         alignItems: 'center',
-        width: 400,
+        width: '100%',
     },
     input: {
         marginLeft: 15,
