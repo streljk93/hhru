@@ -9,6 +9,24 @@ export function checkExpiryDate(microsec) {
     return result;
 }
 
-export function getSignList () {
-    return ['<', '<=', '=', '>=', '>'];
+export function objectToParams(object) {
+    let str = "",
+        key;
+
+    for (key in object) {
+        if (str !== "") {
+            str += "&";
+        }
+
+        // if array
+        if ((typeof object[key]) === 'object' && object[key].length) {
+            object[key].forEach(item => {
+                str += key + "=" + encodeURIComponent(item);
+            });
+        } else {
+            str += key + "=" + encodeURIComponent(object[key]);
+        }
+    }
+
+    return str;
 }

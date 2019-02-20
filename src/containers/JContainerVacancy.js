@@ -13,7 +13,7 @@ export default connect(
         vacancyMeta: state.vacancy.meta,
     }),
     dispatch => ({
-        onRemoteFetchVacancyList: () => dispatch(remoteFetchVacancyList()),
+        onRemoteFetchVacancyList: (filterList) => dispatch(remoteFetchVacancyList(filterList)),
     })
 )(JScreenVacancy);
 

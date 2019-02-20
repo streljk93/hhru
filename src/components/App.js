@@ -6,15 +6,12 @@ import { withStyles } from '@material-ui/core';
 import JHeader from './JHeader';
 import JDrawer from './JDrawer';
 import JAlert from '../containers/JAlert';
-import JScreenResume from '../containers/JContainerResume';
+// import JScreenResume from '../containers/JContainerResume';
 import JScreenVacancy from '../containers/JContainerVacancy';
+import JScreenVacancyOpening from '../containers/JContainerVacancyOpening';
 import styles from '../styles/AppStyles';
 
 const menu = [[{
-    icon: 'Face',
-    title: 'Резюме',
-    href: '/resume',
-}, {
     icon: 'CreditCard',
     title: 'Вакансии',
     href: '/vacancy',
@@ -24,14 +21,14 @@ class App extends React.Component {
 
     render() {
         const { classes } = this.props;
-        console.log(this.props.theme);
+        // console.log(this.props.theme);
         return (
             <div className={classes.root}>
                 <JHeader
-                    title='JK Card'
+                    title='HHru API'
                     onAction={this.props.onToggleDrawer}
                     iconAction='Menu'
-                    iconMenu='CardGiftcard'
+                    iconMenu='Face'
                     isLoading={this.props.isLoading}
                 />
                 <JDrawer
@@ -44,9 +41,11 @@ class App extends React.Component {
                     <div className={classes.toolbar} />
                     <div className={classes.content}>
 
-                        <Route exact path='/' component={JScreenResume} />
-                        <Route exact path='/resume' component={JScreenResume} />
+                        {/*<Route exact path='/' component={JScreenResume} />*/}
+                        {/*<Route exact path='/resume' component={JScreenResume} />*/}
+                        <Route exact path='/' component={JScreenVacancy} />
                         <Route exact path='/vacancy' component={JScreenVacancy} />
+                        <Route exact path='/vacancy/:id' component={JScreenVacancyOpening} />
 
                     </div>
                 </main>

@@ -18,8 +18,10 @@ class JVacancyList extends React.Component {
             <Grid container className={classes.root}>
 
                 {items.map((vacancy, index) =>
-                    <Grid key={index} item sm={4} className={classes.vacancy}>
+                    <Grid key={index} item sm={12} md={4} className={classes.vacancy}>
                         <JVacancy
+                            id={vacancy.id}
+                            area={vacancy.area.name}
                             name={vacancy.name}
                             employer={vacancy.employer.name}
                             responsibility={vacancy.snippet.responsibility}

@@ -1,5 +1,7 @@
 // libraries
 import axios from 'axios';
+import { startCommonLoader, stopCommonLoader } from "./ui";
+import { objectToParams } from '../libraries/helpers';
 
 function requestVacancy() {
     return {
@@ -27,12 +29,37 @@ function saveVacancyMeta({ found, pages, per_page, page }) {
     };
 }
 
-export function remoteFetchVacancyList() {
-    return dispatch => {
+function saveVacancyFilterList(filterList) {
+    return {
+        type: 'SAVE_VACANCY_FILTER_LIST',
+        payload: filterList,
+    };
+}
+
+function saveVacancySelected(vacancy) {
+    return {
+        type: 'SAVE_VACANCY_SELECTED',
+        payload: vacancy,
+    };
+}
+
+export function remoteFetchVacancyList(filterList = null) {
+    return (dispatch, getState) => {
+        let query = '';
+
+        if (filterList) {
+
+            // save filter list
+            dispatch(saveVacancyFilterList(filterList));
+            query = `?${objectToParams(getState().vacancy.meta.filter)}`;
+        }
 
         dispatch(requestVacancy());
-        return axios.get('/vacancies').then(response => {
+        dispatch(startCommonLoader());
+
+        return axios.get(`/vacancies${query}`).then(response => {
             dispatch(responseVacancy());
+            dispatch(stopCommonLoader());
 
             if (response.data.found) {
                 dispatch(saveVacancyList(response.data.items));
@@ -43,9 +70,37 @@ export function remoteFetchVacancyList() {
             return false;
         }).catch(error => {
             dispatch(responseVacancy());
+            dispatch(stopCommonLoader());
 
             return false;
         })
 
     };
+}
+
+export function remoteFetchVacancy(id) {
+    return dispatch => {
+
+        dispatch(requestVacancy());
+        dispatch(startCommonLoader());
+
+        axios.get(`/vacancies/${id}`).then(response => {
+            dispatch(responseVacancy());
+            dispatch(stopCommonLoader());
+
+            if (response.data.id) {
+                dispatch(saveVacancySelected(response.data));
+
+                return true;
+            }
+
+            return false;
+        }).catch(error => {
+            dispatch(responseVacancy());
+            dispatch(stopCommonLoader());
+
+            return false;
+        });
+
+    }
 }

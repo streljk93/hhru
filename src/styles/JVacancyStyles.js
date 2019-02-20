@@ -3,6 +3,7 @@ export default theme => ({
     root: {
         height: '100%',
         minWidth: 275,
+        cursor: 'pointer',
     },
     subtitle: {
         marginBottom: 12,

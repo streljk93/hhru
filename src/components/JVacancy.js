@@ -1,9 +1,8 @@
 // libraries
 import React from 'react';
 import { withStyles, Card, CardContent, Typography  } from "@material-ui/core";
+import { withRouter } from "react-router-dom";
 import moment from 'moment';
-
-// own components
 
 // styles
 import styles from "../styles/JVacancyStyles";
@@ -11,10 +10,21 @@ import styles from "../styles/JVacancyStyles";
 class JVacancy extends React.Component {
 
     render() {
-        const { classes, name, employer, responsibility, requirement, publishedDate } = this.props;
+        const {
+            classes,
+            id,
+            name,
+            employer,
+            responsibility,
+            requirement,
+            publishedDate,
+            area
+        } = this.props;
 
         return (
-            <Card className={classes.root}>
+            <Card
+                onClick={() => this.props.history.push(`/vacancy/${id}`)}
+                className={classes.root}>
                 <CardContent>
                     <div className={classes.wrap}>
                         <div className={classes.header}>
@@ -26,6 +36,9 @@ class JVacancy extends React.Component {
                             </Typography>
                             <Typography className={classes.subtitle} color="textSecondary">
                                 {employer}
+                            </Typography>
+                            <Typography className={classes.subtitle} color="primary">
+                                {area}
                             </Typography>
                         </div>
                         <div className={classes.content}>
@@ -44,5 +57,6 @@ class JVacancy extends React.Component {
 }
 
 JVacancy = withStyles(styles)(JVacancy);
+JVacancy = withRouter(JVacancy);
 
 export default JVacancy;

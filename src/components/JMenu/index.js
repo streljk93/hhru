@@ -14,7 +14,7 @@ class JMenu extends React.Component {
         const { classes } = this.props;
 
         return (
-            <div className={classes.menuRoot}>
+            <div className={classes.menu}>
                 {this.props.children}
             </div>
         );
